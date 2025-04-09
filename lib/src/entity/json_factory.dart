@@ -1,14 +1,11 @@
 import 'package:tamed_json/src/types/json.dart';
 
-abstract interface class JsonRequestDTO {
-  dynamic get toJSON;
-}
-
 abstract interface class JsonFactory<Model> {
   const JsonFactory();
 
-  dynamic toJSON(Model model);
-  Model fromJSON(JsonMap json);
+  dynamic toJson(Model model);
+
+  Model fromJson(dynamic data);
 }
 
 abstract interface class JsonFactoryList<Model> {

@@ -8,6 +8,7 @@ import 'package:tamed_json/src/types/json.dart';
 // Override double type in file
 // use json.double()
 typedef _Double = double;
+typedef _Bool = bool;
 
 extension JsonParseField on JsonMap {
   dynamic _get(String? key) => key == null ? this : this[key];
@@ -15,12 +16,12 @@ extension JsonParseField on JsonMap {
   JsonParseFieldException _parseError(String type, String? key) =>
       JsonParseFieldException(type: type, json: this, key: key);
 
-  T _parseGeneric<T>(String? key, T? or, {bool isNullable = false}) {
+  T _parseGeneric<T>(String? key, T? or, {_Bool isNullable = false}) {
     var data = _get(key);
 
     try {
       dynamic tryResult = JsonUnknownType();
-      if (T == String || T == bool || data == null) {
+      if (T == String || T == _Bool || T == JsonMap || data == null) {
         tryResult = data;
       } else if (T == int) {
         tryResult = (data as num).toInt();
@@ -66,9 +67,16 @@ extension JsonParseField on JsonMap {
       _parseGeneric<String>(key, or, isNullable: true);
 
   /// Read bool value from [key] with default [or] value
-  bool boolean([String? key, bool? or]) => _parseGeneric<bool>(key, or);
+  _Bool bool([String? key, _Bool? or]) => _parseGeneric<_Bool>(key, or);
 
   /// Read bool? value from [key] with default [or] value
-  bool booleanNull([String? key, bool? or]) =>
-      _parseGeneric<bool>(key, or, isNullable: true);
+  _Bool? boolNull([String? key, _Bool? or]) =>
+      _parseGeneric<_Bool>(key, or, isNullable: true);
+
+  /// Read JsonMap value from [key] with default [or] value
+  JsonMap object([String? key, JsonMap? or]) => _parseGeneric<JsonMap>(key, or);
+
+  /// Read JsonMap? value from [key] with default [or] value
+  JsonMap? objectNull([String? key, JsonMap? or]) =>
+      _parseGeneric<JsonMap>(key, or, isNullable: true);
 }

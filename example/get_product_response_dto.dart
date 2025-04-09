@@ -1,4 +1,4 @@
-import 'package:tamed_json/src/entity/json_factory.dart';
+import 'package:tamed_json/src/entity/json_dto.dart';
 
 class GetProductResponseDTO implements JsonRequestDTO {
   GetProductResponseDTO({
@@ -10,7 +10,7 @@ class GetProductResponseDTO implements JsonRequestDTO {
   final String password;
 
   @override
-  get toJSON => {
+  get toJson => {
         'username': username,
         'password': password,
       };

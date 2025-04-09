@@ -18,7 +18,7 @@ List<D> _factoryList<D>(
   return (data)
       .map((e) {
         try {
-          final result = i.fromJSON(e);
+          final result = i.fromJson(e);
           return result;
         } catch (e) {
           if (throws) rethrow;
@@ -28,27 +28,18 @@ List<D> _factoryList<D>(
       .toList();
 }
 
-// TODO
-// extension JsonListParseFactory on List<dynamic> {
-//   List<D> factoryList<D>(
-//     JsonFactory<D> i, {
-//     List<D>? or,
-//     bool throws = false,
-//   }) =>
-//       _factoryList(i, or: or, throws: throws, json: this);
-// }
-
 extension JsonParseFactoryExtension on JsonMap {
   D factory<D, T extends JsonFactory<D>>(T i, {String? key, D? or}) {
     var data = key != null ? this[key] : this;
     if (data == null && or != null) return or;
-    return i.fromJSON(data);
+    return i.fromJson(data);
   }
 
   List<D> factoryList<D>(
     JsonFactory<D> i, {
+    String? key,
     List<D>? or,
     bool throws = false,
   }) =>
-      _factoryList(i, or: or, throws: throws, json: this);
+      _factoryList(i, key: key, or: or, throws: throws, json: this);
 }

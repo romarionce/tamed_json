@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'model_json_factory.dart';
 import 'product_model.dart';
 
-dynamic deco(Object? data) {
+dynamic decode(Object? data) {
   return jsonDecode(jsonEncode(data));
 }
 
@@ -12,13 +12,12 @@ void main() {
     ProductModel(price: 2.1, title: 'Table'),
   ];
 
-  final modelFactory = ProductModelJsonFactory();
-  final List jsonModel = deco(
-    startModels.map(modelFactory.toJSON).toList(),
+  const modelFactory = ProductModelJsonFactory();
+  final List jsonModel = decode(
+    startModels.map(modelFactory.toJson).toList(),
   );
+
   print(jsonModel);
 
-  final model = jsonModel.map((e) => modelFactory.fromJSON(e)).toList();
-
-  print(model);
+  //TODO
 }
