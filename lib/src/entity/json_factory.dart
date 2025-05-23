@@ -3,9 +3,9 @@ import 'package:tamed_json/src/types/json.dart';
 abstract interface class JsonFactory<Model> {
   const JsonFactory();
 
-  dynamic toJson(Model model);
+  JsonMap toJson(Model model);
 
-  Model fromJson(dynamic data);
+  Model fromJson(JsonMap data);
 }
 
 abstract interface class JsonFactoryList<Model> {
