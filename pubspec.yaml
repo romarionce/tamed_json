@@ -1,6 +1,6 @@
 name: tamed_json
 description: A utility library for JSON parsing and factory support in Dart.
-version: 0.0.0
+version: 0.1.0
 homepage: https://github.com/romarionce/tamed_json
 license: MIT
 environment:
