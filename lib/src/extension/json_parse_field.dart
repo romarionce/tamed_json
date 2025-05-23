@@ -25,7 +25,7 @@ extension JsonParseField on JsonMap {
     }
     try {
       dynamic tryResult = JsonUnknownType();
-      if (T == String || T == _Bool || T == JsonMap) {
+      if (T == String || T == _Bool || T == JsonMap || T == List) {
         tryResult = data;
       } else if (T == int) {
         tryResult = (data as num).toInt();
@@ -81,4 +81,9 @@ extension JsonParseField on JsonMap {
   /// Read JsonMap? value from [key] with default [or] value
   JsonMap? objectNull([String? key, JsonMap? or]) =>
       _parseGeneric<JsonMap>(key, or, isNullable: true);
+
+  List list([String? key, List? or]) => _parseGeneric<List>(key, or)!;
+
+  List? listNull([String? key, List? or]) =>
+      _parseGeneric<List>(key, or, isNullable: true);
 }
