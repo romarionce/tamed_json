@@ -18,10 +18,14 @@ extension JsonParseField on JsonMap {
 
   T? _parseGeneric<T>(String? key, T? or, {_Bool isNullable = false}) {
     var data = _get(key);
-
+    if (data == null) {
+      if (or != null) return or;
+      if (isNullable) return null;
+      throw _parseError('$T${isNullable ? '?' : ''}', key);
+    }
     try {
       dynamic tryResult = JsonUnknownType();
-      if (T == String || T == _Bool || T == JsonMap || data == null) {
+      if (T == String || T == _Bool || T == JsonMap) {
         tryResult = data;
       } else if (T == int) {
         tryResult = (data as num).toInt();
@@ -29,11 +33,7 @@ extension JsonParseField on JsonMap {
         tryResult = (data as num).toDouble();
       }
 
-      if (tryResult != null && tryResult is! JsonUnknownType) {
-        return tryResult as T;
-      }
-
-      if (isNullable && tryResult == null) {
+      if (tryResult is! JsonUnknownType) {
         return tryResult as T;
       }
 
@@ -46,7 +46,7 @@ extension JsonParseField on JsonMap {
   }
 
   /// Read int value from [key] with default [or] value
-  int integer(String? key, {int? or}) => _parseGeneric<int>(key, or)!;
+  int integer([String? key, int? or]) => _parseGeneric<int>(key, or)!;
 
   /// Read int? value from [key] with default [or] value
   int? integerNull([String? key, int? or]) =>
