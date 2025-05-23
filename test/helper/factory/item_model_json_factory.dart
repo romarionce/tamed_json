@@ -8,7 +8,7 @@ class ItemModelJsonFactory implements JsonFactory<ItemModel> {
   @override
   ItemModel fromJson(JsonMap json) {
     return ItemModel(
-      id: json.integer('id'),
+      id: json.int('id'),
       title: json.string('title'),
     );
   }

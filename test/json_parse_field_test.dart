@@ -23,9 +23,9 @@ void main() {
     };
 
     test('integer correct value', () {
-      expect(json.integer(intKey), 1);
-      expect(json.integerNull(randomKey), null);
-      expect(json.integer(randomKey, 1), 1);
+      expect(json.int(intKey), 1);
+      expect(json.intNull(randomKey), null);
+      expect(json.int(randomKey, 1), 1);
     });
 
     test('double correct value', () {

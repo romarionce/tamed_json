@@ -5,10 +5,11 @@ import 'package:tamed_json/src/exception/json_parse_field_exception.dart';
 import 'package:tamed_json/src/model/json_unknown_type.dart';
 import 'package:tamed_json/src/types/json.dart';
 
-// Override double type in file
+// Override double, int, bool type in file
 // use json.double()
 typedef _Double = double;
 typedef _Bool = bool;
+typedef _Int = int;
 
 extension JsonParseField on JsonMap {
   dynamic _get(String? key) => key == null ? this : this[key];
@@ -27,7 +28,7 @@ extension JsonParseField on JsonMap {
       dynamic tryResult = JsonUnknownType();
       if (T == String || T == _Bool || T == JsonMap || T == List) {
         tryResult = data;
-      } else if (T == int) {
+      } else if (T == _Int) {
         tryResult = (data as num).toInt();
       } else if (T == _Double) {
         tryResult = (data as num).toDouble();
@@ -46,11 +47,11 @@ extension JsonParseField on JsonMap {
   }
 
   /// Read int value from [key] with default [or] value
-  int integer([String? key, int? or]) => _parseGeneric<int>(key, or)!;
+  _Int int([String? key, _Int? or]) => _parseGeneric<_Int>(key, or)!;
 
   /// Read int? value from [key] with default [or] value
-  int? integerNull([String? key, int? or]) =>
-      _parseGeneric<int>(key, or, isNullable: true);
+  _Int? intNull([String? key, _Int? or]) =>
+      _parseGeneric<_Int>(key, or, isNullable: true);
 
   /// Read double value from [key] with default [or] value
   _Double double([String? key, _Double? or]) =>

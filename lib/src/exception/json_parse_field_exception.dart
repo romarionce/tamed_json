@@ -7,6 +7,6 @@ class JsonParseFieldException extends TimedJsonException {
     required super.json,
   }) : super(
           reason:
-              "Expected $type, but got ${json[key]} value. data['$key'] is ${json[key]}",
+              "Expected $type, but got ${json[key]} (${json[key].runtimeType}). data['$key'] is ${json[key]}",
         );
 }
