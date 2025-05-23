@@ -16,7 +16,7 @@ extension JsonParseField on JsonMap {
   JsonParseFieldException _parseError(String type, String? key) =>
       JsonParseFieldException(type: type, json: this, key: key);
 
-  T _parseGeneric<T>(String? key, T? or, {_Bool isNullable = false}) {
+  T? _parseGeneric<T>(String? key, T? or, {_Bool isNullable = false}) {
     var data = _get(key);
 
     try {
@@ -46,35 +46,37 @@ extension JsonParseField on JsonMap {
   }
 
   /// Read int value from [key] with default [or] value
-  int integer(String? key, {int? or}) => _parseGeneric<int>(key, or);
+  int integer(String? key, {int? or}) => _parseGeneric<int>(key, or)!;
 
   /// Read int? value from [key] with default [or] value
   int? integerNull([String? key, int? or]) =>
       _parseGeneric<int>(key, or, isNullable: true);
 
   /// Read double value from [key] with default [or] value
-  _Double double([String? key, _Double? or]) => _parseGeneric<_Double>(key, or);
+  _Double double([String? key, _Double? or]) =>
+      _parseGeneric<_Double>(key, or)!;
 
   /// Read double? value from [key] with default [or] value
-  _Double doubleNull([String? key, _Double? or]) =>
+  _Double? doubleNull([String? key, _Double? or]) =>
       _parseGeneric<_Double>(key, or, isNullable: true);
 
   /// Read String value from [key] with default [or] value
-  String string([String? key, String? or]) => _parseGeneric<String>(key, or);
+  String string([String? key, String? or]) => _parseGeneric<String>(key, or)!;
 
   /// Read String? value from [key] with default [or] value
   String? stringNull([String? key, String? or]) =>
       _parseGeneric<String>(key, or, isNullable: true);
 
   /// Read bool value from [key] with default [or] value
-  _Bool bool([String? key, _Bool? or]) => _parseGeneric<_Bool>(key, or);
+  _Bool bool([String? key, _Bool? or]) => _parseGeneric<_Bool>(key, or)!;
 
   /// Read bool? value from [key] with default [or] value
   _Bool? boolNull([String? key, _Bool? or]) =>
       _parseGeneric<_Bool>(key, or, isNullable: true);
 
   /// Read JsonMap value from [key] with default [or] value
-  JsonMap object([String? key, JsonMap? or]) => _parseGeneric<JsonMap>(key, or);
+  JsonMap object([String? key, JsonMap? or]) =>
+      _parseGeneric<JsonMap>(key, or)!;
 
   /// Read JsonMap? value from [key] with default [or] value
   JsonMap? objectNull([String? key, JsonMap? or]) =>
