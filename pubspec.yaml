@@ -8,5 +8,3 @@ environment:
 
 dev_dependencies:
   test: ^1.20.0
-
-publish_to: "https://pub.dev"
