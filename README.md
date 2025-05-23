@@ -62,6 +62,7 @@ final int? count = json.objectNull('a')?.int('b');
 ```
 
 
+#
 ##### 2. Create factory
 ```dart
 class ProductModelJsonFactory implements JsonFactory<ProductModel> {
@@ -109,7 +110,7 @@ final List<ProductModel> products = json.factoryList(
   throws: false,
 );
 ```
-
+#
 ##### 3 Combine it as you need
 ```dart
 /// EXAMPLE 1
